@@ -1,8 +1,9 @@
-import { IsString, IsNumber } from "class-validator";
+import { IsString, IsNumber, Length } from "class-validator";
 
 export class CreateProduitDto {
 
     @IsString()
+    @Length(1)
     name: string;
 
     @IsNumber()

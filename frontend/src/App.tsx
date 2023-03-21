@@ -72,10 +72,6 @@ export default function App() {
 
     // Modifier un produit
     const handleUpdateProduit = (produitId: number, name: string, price: string, quantity: string) => {
-        console.log("produitId", produitId);
-        console.log("name", name);
-        console.log("price", price);
-        console.log("quantity", quantity);
 
         const body = JSON.stringify({
             name: name,
@@ -135,17 +131,17 @@ export default function App() {
     // Affichage
     return (
         <div className="App">
-
+<div>
             {/* HEADER */}
-            <header className="App-header fs-3 p-3 mb-2 bg-primary text-white">
+            <header className="App-header fs-3 pt-3 pb-3 mb-2 bg-primary text-white">
                 Produits
             </header>
+</div>
 
-
-            <div className="ms-5 me-5">
+            <div className="ms-1 me-1">
                 {/* BOUTON AJOUTER OU FORMULAIRE */}
                 {addForm ?
-                    <form className="row g-3 mt-4  mb-4   border" onSubmit={handleSubmitAjouter} >
+                    <form className="row g-3 m-4 border" onSubmit={handleSubmitAjouter} >
 
                         <div className="">
                             <label htmlFor="exampleFormControlInput1" className="form-label">Nom</label>
@@ -180,16 +176,17 @@ export default function App() {
                             />
                         </div>
 
-                        <button
-                            type="submit"
-                            className="btn btn-primary mb-3"
-                        >
-                            Ajouter
-                        </button>
-
+                        <div className="mt-4">
+                            <button
+                                type="submit"
+                                className="btn btn-primary mb-4"
+                            >
+                                Ajouter
+                            </button>
+                        </div>
                     </form>
 
-                    : <button type="button" className="btn btn-primary mt-4 ms-2 mb-4" onClick={() => setAddForm(true)}>Ajouter un produit</button>
+                    : <button type="button" className="btn btn-primary m-2" onClick={() => setAddForm(true)}>Ajouter un produit</button>
                 }
 
 
@@ -197,36 +194,37 @@ export default function App() {
 
 
 
+                <div>
+                    {/* TABLEAU DES PRODUITS */}
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Prix</th>
+                                <th scope="col">Quantité</th>
+                                <th scope="col ">Action</th>
+                            </tr>
+                        </thead>
 
-                {/* TABLEAU DES PRODUITS */}
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Prix</th>
-                            <th scope="col">Quantité</th>
-                            <th scope="col ">Action</th>
-                        </tr>
-                    </thead>
 
+                        {/* COMPONENT PRODUITS */}
+                        <Produits
+                            produits={produits}
+                            handleDelete={handleDelete}
+                            newProduitName={newProduitName}
+                            newProduitPrice={newProduitPrice}
+                            newProduitQuantity={newProduitQuantity}
+                            setNewProduitName={setNewProduitName}
+                            setNewProduitPrice={setNewProduitPrice}
+                            setNewProduitQuantity={setNewProduitQuantity}
+                            handleUpdateProduit={handleUpdateProduit}
+                            editingProduitId={editingProduitId}
+                            setEditingProduitId={setEditingProduitId}
+                        />
 
-                    {/* COMPONENT PRODUITS */}
-                    <Produits
-                        produits={produits}
-                        handleDelete={handleDelete}
-                        newProduitName={newProduitName}
-                        newProduitPrice={newProduitPrice}
-                        newProduitQuantity={newProduitQuantity}
-                        setNewProduitName={setNewProduitName}
-                        setNewProduitPrice={setNewProduitPrice}
-                        setNewProduitQuantity={setNewProduitQuantity}
-                        handleUpdateProduit={handleUpdateProduit}
-                        editingProduitId={editingProduitId}
-                        setEditingProduitId={setEditingProduitId}
-                    />
-
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
     );
