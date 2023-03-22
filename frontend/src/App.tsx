@@ -73,40 +73,44 @@ export default function App() {
     // Modifier un produit
     const handleUpdateProduit = (produitId: number, name: string, price: string, quantity: string) => {
 
-        const body = JSON.stringify({
-            name: name,
-            price: parseInt(price),
-            quantity: parseInt(quantity),
-        });
+        if (name.length > 0 && price.length > 0 && quantity.length > 0) {
+            const body = JSON.stringify({
+                name: name,
+                price: parseInt(price),
+                quantity: parseInt(quantity),
+            });
 
-        const options = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: body,
-        };
+            const options = {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: body,
+            };
 
-        fetch(`http://localhost:3000/api/produits/${produitId}`, options)
-            .then(response => response.json())
-            .then(response => {
+            fetch(`http://localhost:3000/api/produits/${produitId}`, options)
+                .then(response => response.json())
+                .then(response => {
 
-                const updatedProduits = produits.map((produit: TProduit) => {
+                    const updatedProduits = produits.map((produit: TProduit) => {
 
-                    if (produit.id === produitId) {
-                        return response.data;
-                    };
+                        if (produit.id === produitId) {
+                            return response.data;
+                        };
 
-                    return produit;
-                });
+                        return produit;
+                    });
 
-                setProduits(updatedProduits)
-                setNewProduitName("");
-                setNewProduitPrice("");
-                setNewProduitQuantity("");
-                setEditingProduitId(0);
-            })
-            .catch(err => console.error(err));
+                    setProduits(updatedProduits)
+                    setNewProduitName("");
+                    setNewProduitPrice("");
+                    setNewProduitQuantity("");
+                    setEditingProduitId(0);
+                })
+                .catch(err => console.error(err));
+        }
+
+        else alert("Veuillez remplir tous les champs ou annuler la modification");
     };
 
 
@@ -131,12 +135,12 @@ export default function App() {
     // Affichage
     return (
         <div className="App">
-<div>
-            {/* HEADER */}
-            <header className="App-header fs-3 pt-3 pb-3 mb-2 bg-primary text-white">
-                Produits
-            </header>
-</div>
+            <div>
+                {/* HEADER */}
+                <header className="App-header fs-3 pt-3 pb-3 mb-2 bg-primary text-white">
+                    Produits
+                </header>
+            </div>
 
             <div className="ms-1 me-1">
                 {/* BOUTON AJOUTER OU FORMULAIRE */}
