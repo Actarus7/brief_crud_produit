@@ -198,7 +198,7 @@ export default function App() {
 
 
 
-                <div>
+                <div className="table-responsive">
                     {/* TABLEAU DES PRODUITS */}
                     <table className="table">
                         <thead>

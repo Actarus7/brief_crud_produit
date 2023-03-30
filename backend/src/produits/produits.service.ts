@@ -23,9 +23,6 @@ export class ProduitsService {
   async findAll() {
     const produits = await Produit.find();
 
-    // Vérifie qu'il y a des produits dans la base de données
-    if (produits.length < 1) throw new NotFoundException('Aucun produit dans la base de données');
-
     // Renvoie la liste des produits
     return produits;
   };
